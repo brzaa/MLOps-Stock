@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 jobs:
-  train-model:
+  train-and-deploy-model:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
@@ -30,10 +30,13 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pandas numpy scikit-learn xgboost mlflow joblib yfinance azureml-sdk
+        pip install -r requirements.txt
 
-    - name: Run Azure ML script
+    - name: Run Azure ML training script
       run: python scripts/train_aml.py
+
+    - name: Deploy model
+      run: python scripts/deploy_model.py
 
     - name: Diagnostic information
       run: |
