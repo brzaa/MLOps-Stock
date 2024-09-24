@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.PAT }}
 
     - name: Create project structure
       run: |
@@ -55,7 +57,10 @@ jobs:
 
     - name: Push changes
       if: steps.git-check.outputs.changed == 'true'
-      run: git push
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.PAT }}
+        branch: ${{ github.ref }}
 
     - name: Check for errors
       if: failure()
