@@ -1,0 +1,35 @@
+name: Deploy Model to Azure ML
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Deploy Model
+      env:
+        AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+        AZURE_TENANT_ID: ${{ fromJson(secrets.AZURE_CREDENTIALS).tenantId }}
+        AZURE_CLIENT_ID: ${{ fromJson(secrets.AZURE_CREDENTIALS).clientId }}
+        AZURE_CLIENT_SECRET: ${{ fromJson(secrets.AZURE_CREDENTIALS).clientSecret }}
+        AZURE_SUBSCRIPTION_ID: ${{ fromJson(secrets.AZURE_CREDENTIALS).subscriptionId }}
+        AML_WORKSPACE_NAME: ${{ secrets.AML_WORKSPACE_NAME }}
+        AML_RESOURCE_GROUP: ${{ secrets.AML_RESOURCE_GROUP }}
+      run: python deploy_model.py
