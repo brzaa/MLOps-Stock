@@ -1,0 +1,53 @@
+name: Setup MLOps Project Structure
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  setup_project:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Create project structure
+      run: |
+        mkdir -p .github/workflows
+        mkdir -p src/{data,models,utils}
+        mkdir -p notebooks
+        mkdir -p tests
+        mkdir -p config
+        mkdir -p scripts
+
+    - name: Create initial files
+      run: |
+        echo "# MLOps-Stock" > README.md
+        echo "name: Train Model" > .github/workflows/train_model.yml
+        echo "# Data preparation functions" > src/data/data_preparation.py
+        echo "# Stock prediction pipeline" > src/models/stock_prediction_pipeline.py
+        echo "# Helper functions" > src/utils/helper_functions.py
+        echo "# Exploratory Data Analysis" > notebooks/exploratory_data_analysis.ipynb
+        echo "# Test data preparation" > tests/test_data_preparation.py
+        echo "# Test stock prediction pipeline" > tests/test_stock_prediction_pipeline.py
+        echo "{}" > config/config.json
+        echo "# Model deployment configuration" > config/deployment_config.yml
+        echo "# Inference configuration" > config/inference_config.yml
+        echo "# Azure ML training script" > scripts/train_aml.py
+        echo "# Model deployment script" > scripts/deploy_model.py
+        echo "# Project dependencies" > requirements.txt
+        echo ".env\nvenv/\n__pycache__/\n*.pyc" > .gitignore
+
+    - name: Commit changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "Set up MLOps project structure" -a
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
