@@ -1,4 +1,5 @@
 # Project dependencies
+azureml-sdk
 pandas
 numpy
 xgboost
