@@ -1,1 +1,10 @@
 # Project dependencies
+
+pandas
+numpy
+yfinance
+scikit-learn
+xgboost
+lightgbm
+tensorflow
+mlflow
