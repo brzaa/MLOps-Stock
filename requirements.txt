@@ -7,3 +7,5 @@ xgboost
 mlflow
 joblib
 yfinance
+azure-ml-core
+azure-identity
