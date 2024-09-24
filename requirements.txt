@@ -7,3 +7,4 @@ xgboost
 mlflow
 joblib
 yfinance
+azureml-sdk[automl]
