@@ -1,1 +1,9 @@
 # Project dependencies
+azureml-sdk
+pandas
+numpy
+scikit-learn
+xgboost
+mlflow
+joblib
+yfinance
