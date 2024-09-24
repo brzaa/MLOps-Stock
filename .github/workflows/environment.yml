@@ -1,0 +1,14 @@
+name: myenv
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.9
+  - pandas=1.5.3
+  - numpy=1.21.0
+  - scikit-learn=1.5.1
+  - xgboost=1.6.2
+  - joblib=1.2.0
+  - pytz=2023.3
+  - scipy=1.9.3
+  - threadpoolctl=3.1.0
