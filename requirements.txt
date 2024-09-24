@@ -1,5 +1,6 @@
-azureml-sdk[automl]
-scikit-learn
+# Project dependencies
+azureml-sdk[automl]<1.54.0
+scikit-learn<1.0.0
 pandas
 numpy
 xgboost
