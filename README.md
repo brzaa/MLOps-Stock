@@ -1,3 +1,1 @@
 # MLOps-Stock
-
-Toy project
