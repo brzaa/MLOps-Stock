@@ -9,3 +9,5 @@ lightgbm
 tensorflow
 mlflow
 azureml-sdk
+azure-identity
+azure-ai-ml
