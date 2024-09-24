@@ -1,11 +1,9 @@
 # Project dependencies
-azureml-sdk==1.57.0  # Use only one version across all places
-mlflow==2.3.2
 azureml-sdk
-pandas==1.5.3
-numpy==1.21.0
-scikit-learn==1.5.1
+pandas
+numpy
 scikit-learn
-xgboost==1.6.2
-joblib==1.2.0
-yfinance==0.2.12
+xgboost
+mlflow
+joblib
+yfinance
