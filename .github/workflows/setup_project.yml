@@ -3,13 +3,14 @@ name: Setup MLOps Project Structure
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   setup_project:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-      with:
-        token: ${{ secrets.PAT }}
 
     - name: Create project structure
       run: |
@@ -47,20 +48,14 @@ jobs:
           echo "changed=true" >> $GITHUB_OUTPUT
         fi
 
-    - name: Commit changes
+    - name: Commit and push changes
       if: steps.git-check.outputs.changed == 'true'
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add .
         git commit -m "Set up MLOps project structure" -a
-
-    - name: Push changes
-      if: steps.git-check.outputs.changed == 'true'
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.PAT }}
-        branch: ${{ github.ref }}
+        git push
 
     - name: Check for errors
       if: failure()
