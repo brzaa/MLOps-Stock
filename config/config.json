@@ -1,1 +1,6 @@
-{}
+{ 
+  "tenant_id": "574c4dee-f75b-4e0b-ba9c-32909f13ff63",
+  "subscription_id": "5a420214-0de2-4f97-b5a0-16ecd34ed0dc",
+  "resource_group": "bramastyaz-rg",
+  "workspace_name": "mlops-thesis"
+}
