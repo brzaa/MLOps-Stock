@@ -1,11 +1,1 @@
 # Project dependencies
-
-azureml-sdk
-pandas
-numpy
-scikit-learn
-xgboost
-lightgbm
-tensorflow
-mlflow
-yfinance
