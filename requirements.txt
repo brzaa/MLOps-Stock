@@ -1,10 +1,10 @@
 # Project dependencies
-azureml-sdk
+azureml-sdk[automl]==1.57.0
+scikit-learn==1.5.1
 pandas
 numpy
-scikit-learn
 xgboost
 mlflow
 joblib
 yfinance
-azureml-sdk[automl]
+azureml-sdk
