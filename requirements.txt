@@ -1,11 +1,1 @@
-azureml-sdk
-pandas==1.5.3
-numpy==1.21.0
-scikit-learn
-xgboost==1.6.2
-joblib==1.2.0
-yfinance==0.2.12
-requests==2.31.0  # Explicitly add these missing dependencies
-pytz==2023.3
-scipy==1.9.3
-threadpoolctl==3.1.0
+# Project dependencies
