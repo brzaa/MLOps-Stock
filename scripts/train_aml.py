@@ -1,7 +1,4 @@
-# Azure ML training script
-
 import os
-import argparse
 import pandas as pd
 import numpy as np
 from azureml.core import Workspace, Experiment, Run
@@ -23,10 +20,10 @@ def fetch_stock_data(symbol, start_date, end_date):
 def preprocess_data(df):
     """Preprocess the data for model training."""
     # Calculate additional features
-    df['Returns'] = df['Close'].pct_change()
+    df['Returns'] = df['Close'].pct_change().replace([np.inf, -np.inf], np.nan)
     df['MA5'] = df['Close'].rolling(window=5).mean()
     df['MA20'] = df['Close'].rolling(window=20).mean()
-    df['VolumeChange'] = df['Volume'].pct_change()
+    df['VolumeChange'] = df['Volume'].pct_change().replace([np.inf, -np.inf], np.nan)
     df['HighLowDiff'] = df['High'] - df['Low']
 
     # Drop NaN values
@@ -40,6 +37,10 @@ def preprocess_data(df):
     # Drop last row as it won't have a target value
     X = X[:-1]
     y = y[:-1]
+
+    # Remove any remaining infinite values
+    X = X.replace([np.inf, -np.inf], np.nan).dropna()
+    y = y[X.index]
 
     # Scale the features
     scaler = MinMaxScaler()
@@ -58,7 +59,7 @@ def main():
     run = Run.get_context()
 
     # Get input dataset by name
-    df = fetch_stock_data('MASB.JK', '2020-01-01', '2023-12-31')
+    df = fetch_stock_data('MSFT', '2020-01-01', '2023-12-31')
 
     # Preprocess data
     X, y, scaler = preprocess_data(df)
