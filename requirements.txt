@@ -1,4 +1,4 @@
-azureml-sdk==1.57.0
+azureml-sdk==1.57.0  # Use only one version across all places
 mlflow==2.3.2
 pandas==1.5.3
 numpy==1.21.0
@@ -6,7 +6,7 @@ scikit-learn==1.5.1
 xgboost==1.6.2
 joblib==1.2.0
 yfinance==0.2.12
+requests==2.31.0  # Explicitly add these missing dependencies
 pytz==2023.3
-requests==2.31.0
 scipy==1.9.3
 threadpoolctl==3.1.0
