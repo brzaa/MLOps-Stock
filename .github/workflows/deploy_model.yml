@@ -16,7 +16,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.8'
+        python-version: '3.9'
     
     - name: Install dependencies
       run: |
@@ -32,4 +32,6 @@ jobs:
         AZURE_SUBSCRIPTION_ID: ${{ fromJson(secrets.AZURE_CREDENTIALS).subscriptionId }}
         AML_WORKSPACE_NAME: ${{ secrets.AML_WORKSPACE_NAME }}
         AML_RESOURCE_GROUP: ${{ secrets.AML_RESOURCE_GROUP }}
-      run: python deploy_model.py
+      run: |
+        cd scripts
+        python deploy_model.py
