@@ -1,37 +1,43 @@
 name: Azure ML Workflow
+
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+
 permissions:
   id-token: write
   contents: read
+
 jobs:
   train-and-deploy-model:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+
     - name: Azure login
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
+
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.9'  # Updated to Python 3.9
+        python-version: '3.8'
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install --no-deps azureml-sdk[automl]==1.57.0
-        pip install -r requirements.txt --no-deps
-        pip install --no-deps scikit-learn==1.5.1
-        pip check
+        pip install -r requirements.txt
+
     - name: Run Azure ML training script
       run: python scripts/train_aml.py
+
     - name: Deploy model
       run: python scripts/deploy_model.py
+
     - name: Diagnostic information
       run: |
         echo "GitHub Repository: ${{ github.repository }}"
